@@ -1,7 +1,7 @@
-// import { StatusBar } from 'expo-status-bar';
-// import { useState } from 'react';
-// import { SafeAreaView, SafeAreaViewBase, StyleSheet, Text, TouchableOpacity, View, TextInput, FlatList } from 'react-native';
-// import TaskItem from './components/TaskItem';
+import { StatusBar } from 'expo-status-bar';
+import { useState } from 'react';
+import { SafeAreaView, SafeAreaViewBase, StyleSheet, Text, TouchableOpacity, View, TextInput, FlatList } from 'react-native';
+import TaskItem from './components/TaskItem';
 
 
 // /*
@@ -222,135 +222,137 @@
 
 
 
-// interface Task {
-//   id: string;
-//   title: string;
-//   quantity: number;
-//   purchased: boolean;
-// }
+interface Task {
+  id: string;
+  title: string;
+  quantity: number;
+  purchased: boolean;
+}
 
-// export default function App() {
+export default function App() {
 
-//   const [tasks, setTasks] = useState<Task[]>([]);
-//   const [text, setText] = useState<string>('');
-//   const [quantity, setQuantity] = useState<number>(1);
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [text, setText] = useState<string>('');
+  const [quantity, setQuantity] = useState<number>(1);
 
-//   const handleAddTask = () => {
-//     if (text.trim() === '') return;
+  const handleAddTask = () => {
+    if (text.trim() === '') return;
     
 
-//     const newTask: Task = {
-//       id: Date.now().toString(),
-//       title: text,
-//       quantity: quantity,
-//       purchased: false, 
-//     };
+    const newTask: Task = {
+      id: Date.now().toString(),
+      title: text,
+      quantity: quantity,
+      purchased: false, 
+    };
     
-//     setTasks([...tasks, newTask]);
-//     setText('');
-//     setQuantity(1); 
-//   };
+    setTasks([...tasks, newTask]);
+    setText('');
+    setQuantity(1); 
+  };
 
-//   const handleDeleteTask = (id: string) => {
-//     setTasks(tasks.filter(task => task.id !== id));
-//   };
+  const handleDeleteTask = (id: string) => {
+    setTasks(tasks.filter(task => task.id !== id));
+  };
 
-//   const handleTogglePurchased = (id: string) => {
-//     setTasks(tasks.map(task => 
-//       task.id === id ? { ...task, purchased: !task.purchased } : task
-//     ));
-//   };
-
-
-//   return (
-//     <SafeAreaView style={styles.safeArea}>
-//       <View style={styles.container}>
-//         <Text style={styles.title}>Bilousov</Text>
-//       </View>
-
-//       <View style={styles.inputContainer}>
-//         <TextInput style = {styles.input}
-//           placeholder = "Product"
-//           value = {text}
-//           numberOfLines={1}
-//           onChangeText = {(value) => setText(value)}
-//         />
-//         <TextInput style = {[styles.input, styles.quantityInput]}
-//           placeholder = "Quantity"
-//           value = {quantity.toString()}
-//           keyboardType="numeric"
-//           onChangeText = {(value) => setQuantity(Number(value))}
-//         />
-//         <TouchableOpacity style={styles.addButton} onPress={handleAddTask}>
-//           <Text style={styles.addButtonText}>Add</Text>
-//         </TouchableOpacity>
-//       </View>
-//       <FlatList
-//         data={tasks}
-//         keyExtractor={(item) => item.id}
-//         renderItem={({ item }) => (
-//           <TaskItem
-//             id={item.id}
-//             title={item.title}
-//             quantity={item.quantity}
-//             purchased={item.purchased}
-//             onDelete={handleDeleteTask}
-//             onToggleStatus={handleTogglePurchased}
-//           />
-//         )}
-//         ListEmptyComponent={() => (
-//           <Text style={{ textAlign: 'center', marginTop: 20, color: '#999' }}>
-//             No tasks available. Add a new task!
-//           </Text>
-//         )}
-//       />
-//     </SafeAreaView>
-//   );
+  const handleTogglePurchased = (id: string) => {
+    setTasks(tasks.map(task => 
+      task.id === id ? { ...task, purchased: !task.purchased } : task
+    ));
+  };
 
 
-// }
+  return (
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        <Text style={styles.title}>Bilousov</Text>
+      </View>
 
-// const styles = StyleSheet.create({
-//   safeArea: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//   },
-//   container: {
-//     flex: 1,
-//     paddingTop: 40,
-//     paddingHorizontal: 20,
-//   },
-//   title: {
-//     fontSize: 28,
-//     fontWeight: 'bold',
-//     marginBottom: 20,
-//     color: '#333',
-//   },
-//   inputContainer: {
-//     flexDirection: 'row',
-//     alignItems: 'center',
-//     marginBottom: 20,
-//   },
-//   input: {
-//     flex: 1,
-//     borderColor: '#ccc',
-//     borderWidth: 1,
-//     borderRadius: 8,
-//     padding: 12,
-//     marginRight: 10,
-//   },
-//   addButton: {
-//     backgroundColor: '#4CAF50',
-//     paddingVertical: 12,
-//     paddingHorizontal: 24,
-//     borderRadius: 8,
-//   },
-//   addButtonText: {
-//     color: '#fff',
-//     fontSize: 18,
-//     fontWeight: 'bold',
-//   },
-//   quantityInput: {
-//     flex: 1,
-//   },
-// });
+      <View style={styles.inputContainer}>
+        <TextInput style = {styles.input}
+          placeholder = "Product"
+          value = {text}
+          numberOfLines={1}
+          onChangeText = {(value) => setText(value)}
+        />
+        <TextInput style = {[styles.input, styles.quantityInput]}
+          placeholder = "Quantity"
+          value = {quantity.toString()}
+          keyboardType="numeric"
+          onChangeText = {(value) => setQuantity(Number(value))}
+        />
+        <TouchableOpacity style={styles.addButton} onPress={handleAddTask}>
+          <Text style={styles.addButtonText}>Add</Text>
+        </TouchableOpacity>
+      </View>
+      <FlatList
+        data={tasks}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <TaskItem
+            id={item.id}
+            title={item.title}
+            quantity={item.quantity}
+            purchased={item.purchased}
+            onDelete={handleDeleteTask}
+            onToggleStatus={handleTogglePurchased}
+          />
+        )}
+        ListEmptyComponent={() => (
+          <Text style={{ textAlign: 'center', marginTop: 20, color: '#999' }}>
+            No tasks available. Add a new task!
+          </Text>
+        )}
+      />
+    </SafeAreaView>
+  );
+
+
+}
+
+const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  container: {
+    flex: 1,
+    paddingTop: 40,
+    paddingHorizontal: 20,
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    color: '#333',
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  input: {
+    flex: 1,
+    borderColor: '#ccc',
+    borderWidth: 1,
+    borderRadius: 8,
+    padding: 12,
+    marginRight: 10,
+  },
+  addButton: {
+    backgroundColor: '#4CAF50',
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 8,
+  },
+  addButtonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  quantityInput: {
+    flex: 1,
+  },
+});
+
+
